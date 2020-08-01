@@ -21,8 +21,8 @@ from restapi.views import create_event, delete_event, event_fetch_id, filter_eve
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/event/', create_event),
-    path('api/event/update/', update_event),
+    path('api/event/', create_event, name="create_event" ),
+    path('api/event/update/', update_event, name="update_event"),
     path('api/event/filter/', filter_event),
     path('api/event/single/', event_fetch_id),
     path('api/event/', delete_event),
