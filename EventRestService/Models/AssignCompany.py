@@ -11,4 +11,4 @@ class Assign_company(models.Model):
     is_deleted = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    modified_at = models.DateTimeField(auto_now=True)
+    updated_at = models.DateTimeField(auto_now=True)

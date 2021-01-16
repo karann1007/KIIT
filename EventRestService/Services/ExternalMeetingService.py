@@ -1,8 +1,12 @@
+from datetime import datetime
+
 from django.db import transaction
 from rest_framework import status
 from rest_framework.response import Response
 
 from Accounts.Models.UserDetails import user_details
+from EventRestService.Models.CompanyDetails import Company_Details
+from EventRestService.Models.ContactAlumini import Contact_alumini
 from EventRestService.Models.ExternalMeetings import External_Meetings
 from util.Validator import Validator
 
@@ -13,31 +17,32 @@ class ExternalMeetingService:
         self.__validate_input(data,meetings)
         meet = External_Meetings()
         meet.title = data['title']
-        meet.meeting_date = data['meeting_date']
+        meet.meeting_date = datetime.strptime(data['meeting_date'], "%Y-%m-%dT%H:%M:%S.%fZ").date().strftime('%Y-%m-%d')
         meet.meeting_type = data['meeting_type']
-        meet.open_time = data['open_time']
-        meet.close_time = data['close_time']
+        meet.open_time = datetime.strptime(data['open_time'], "%Y-%m-%dT%H:%M:%S.%fZ").time().strftime('%H:%M')
+        meet.close_time = datetime.strptime(data['close_time'], "%Y-%m-%dT%H:%M:%S.%fZ").time().strftime('%H:%M')
         assigned_to_text = ""
         for e in data['assigned_to']:
             username = user_details.objects.get(id = e).username
             assigned_to_text += username + " , "
+        assigned_to_text = assigned_to_text[:-3]
         meet.assigned_to = assigned_to_text
         meet.reference = data.get('reference')
         meet.agenda = data.get('agenda')
-        meet.comp_id = data['comp_id']
+        meet.comp_id = Company_Details.objects.get(comp_id=data['comp_id'])
         meet.user_id = user.id
-        meet.contact_id = data['contact_id']
+        meet.contact_id = Contact_alumini.objects.get(contact_id=data['contact_id'])
         with transaction.atomic():
             meet.save()
             return Response({'meet_id': meet.meet_id,
                              'title': meet.title,
-                             'open_time': meet.open_time,
-                             'close_time': meet.close_time,
-                             'meeting_date': meet.meeting_date,
+                             'open_time': datetime.strptime(meet.open_time, "%H:%M").time().strftime('%Y-%m-%dT%H:%M:%S.%fZ') ,
+                             'close_time': datetime.strptime(meet.close_time, "%H:%M").time().strftime('%Y-%m-%dT%H:%M:%S.%fZ'),
+                             'meeting_date': datetime.strptime(meet.meeting_date, "%Y-%m-%d").date().strftime('%Y-%m-%dT%H:%M:%S.%fZ'),
                              'meeting_type' : meet.meeting_type ,
                              'notes': meet.agenda,
-                             'company_name' : meet.comp_id,
-                             'contact_name': meet.contact_id,
+                             'company_name' : meet.comp_id.company_name,
+                             'contact_name': meet.contact_id.contact_name,
                              'username' : user.username ,
                              'assigned_to' : meet.assigned_to
                              },status=status.HTTP_201_CREATED)
@@ -45,32 +50,32 @@ class ExternalMeetingService:
     def update_external_meeting(self, data, user, meetings,meet):
         self.__validate_updated_input(data, meetings,meet.meet_id)
         meet.title = data['title']
-        meet.meeting_date = data['meeting_date']
+        meet.meeting_date = datetime.strptime(data['meeting_date'], "%Y-%m-%dT%H:%M:%S.%fZ").date().strftime('%Y-%m-%d')
         meet.meeting_type = data['meeting_type']
-        meet.open_time = data['open_time']
-        meet.close_time = data['close_time']
+        meet.open_time = datetime.strptime(data['open_time'], "%Y-%m-%dT%H:%M:%S.%fZ").time().strftime('%H:%M')
+        meet.close_time = datetime.strptime(data['close_time'], "%Y-%m-%dT%H:%M:%S.%fZ").time().strftime('%H:%M')
         assigned_to_text = ""
         for e in data['assigned_to']:
             username = user_details.objects.get(id=e).username
             assigned_to_text += username + " , "
-            assigned_to_text = assigned_to_text[:-3]
+        assigned_to_text = assigned_to_text[:-3]
         meet.assigned_to = assigned_to_text
         meet.reference = data.get('reference')
         meet.agenda = data.get('agenda')
-        meet.comp_id = data['comp_id']
+        meet.comp_id = Company_Details.objects.get(comp_id=data['comp_id'])
         meet.user_id = user.id
-        meet.contact_id = data['contact_id']
+        meet.contact_id = Contact_alumini.objects.get(contact_id=data['contact_id'])
         with transaction.atomic():
             meet.save()
             return Response({'meet_id': meet.meet_id,
                              'title': meet.title,
-                             'open_time': meet.open_time,
-                             'close_time': meet.close_time,
-                             'meeting_date': meet.meeting_date,
+                             'open_time': datetime.strptime(meet.open_time, "%H:%M").time().strftime('%Y-%m-%dT%H:%M:%S.%fZ') ,
+                             'close_time': datetime.strptime(meet.close_time, "%H:%M").time().strftime('%Y-%m-%dT%H:%M:%S.%fZ'),
+                             'meeting_date': datetime.strptime(meet.meeting_date, "%Y-%m-%d").date().strftime('%Y-%m-%dT%H:%M:%S.%fZ'),
                              'meeting_type': meet.meeting_type,
                              'notes': meet.agenda,
-                             'company_name': meet.comp_id,
-                             'contact_name': meet.contact_id,
+                             'company_name': meet.comp_id.company_name,
+                             'contact_name': meet.contact_id.contact_name,
                              'username': user.username,
                              'assigned_to': meet.assigned_to
                              }, status=status.HTTP_201_CREATED)

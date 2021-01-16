@@ -1,3 +1,5 @@
+from django.db.models import ForeignKey
+
 from Accounts.Models.UserDetails import user_details
 from django.db import models
 
@@ -7,9 +9,9 @@ from EventRestService.Models.ContactAlumini import Contact_alumini
 
 class External_Meetings(models.Model):  # Client meeting activity details
 
-    MEETING = 'ME'
-    EMAIL = 'EM'
-    PHONE = 'PH'
+    MEETING = 'MEETING'
+    EMAIL = 'EMAIL'
+    PHONE = 'PHONE'
 
     MEETING_TYPE_CHOICES = [
         (MEETING, 'Meeting'),
@@ -29,8 +31,8 @@ class External_Meetings(models.Model):  # Client meeting activity details
     location = models.CharField(max_length=100)
     assigned_to = models.TextField(null=True , blank= True)
     reference = models.CharField(max_length=100,blank=True,null=True,default="")
-    meeting_type = models.CharField(max_length=2, choices=MEETING_TYPE_CHOICES, default=MEETING)
+    meeting_type = models.CharField(max_length=10, choices=MEETING_TYPE_CHOICES, default=MEETING)
     description = models.TextField()
     is_open = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    modified_at = models.DateTimeField(auto_now=True)
+    updated_at = models.DateTimeField(auto_now=True)

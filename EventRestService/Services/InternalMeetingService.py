@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.db import transaction
 from rest_framework import status
 from rest_framework.response import Response
@@ -13,9 +15,9 @@ class InternalMeetingService:
         meet = Internal_Meeting()
         meet.title = data['title']
         meet.meeting_type = data['meeting_type']
-        meet.meeting_date = data['meeting_date']
-        meet.open_time = data['open_time']
-        meet.close_time = data['close_time']
+        meet.meeting_date = datetime.strptime(data['meeting_date'], "%Y-%m-%dT%H:%M:%S.%fZ").date().strftime('%Y-%m-%d')
+        meet.open_time = datetime.strptime(data['open_time'], "%Y-%m-%dT%H:%M:%S.%fZ").time().strftime('%H:%M')
+        meet.close_time = datetime.strptime(data['close_time'], "%Y-%m-%dT%H:%M:%S.%fZ").time().strftime('%H:%M')
         meet.meeting_type = data['meeting_type']
         meet.agenda = data.get('agenda')
         meet.user_id = user.id
@@ -24,10 +26,10 @@ class InternalMeetingService:
             meet.save()
             return Response({'meet_id': meet.meet_id,
                              'title': meet.title,
-                             'open_time': meet.open_time,
-                             'close_time': meet.close_time,
+                             'open_time': datetime.strptime(meet.open_time, "%H:%M").time().strftime('%Y-%m-%dT%H:%M:%S.%fZ') ,
+                             'close_time': datetime.strptime(meet.close_time, "%H:%M").time().strftime('%Y-%m-%dT%H:%M:%S.%fZ'),
+                             'meeting_date': datetime.strptime(meet.meeting_date, "%Y-%m-%d").date().strftime('%Y-%m-%dT%H:%M:%S.%fZ'),
                              'meeting_type': meet.meeting_type,
-                             'meeting_date': meet.meeting_date,
                              'notes': meet.agenda},status=status.HTTP_201_CREATED)
 
     def validate_input(self, data,meetings):
@@ -43,9 +45,9 @@ class InternalMeetingService:
         self.validate_updated_input(data, meetings,meet.meet_id)
         meet.title = data['title']
         meet.meeting_type = data['meeting_type']
-        meet.meeting_date = data['meeting_date']
-        meet.open_time = data['open_time']
-        meet.close_time = data['close_time']
+        meet.meeting_date = datetime.strptime(data['meeting_date'], "%Y-%m-%dT%H:%M:%S.%fZ").date().strftime('%Y-%m-%d')
+        meet.open_time = datetime.strptime(data['open_time'], "%Y-%m-%dT%H:%M:%S.%fZ").time().strftime('%H:%M')
+        meet.close_time = datetime.strptime(data['close_time'], "%Y-%m-%dT%H:%M:%S.%fZ").time().strftime('%H:%M')
         meet.meeting_type = data['meeting_type']
         meet.agenda = data.get('agenda')
         meet.user_id = user.id
@@ -54,10 +56,10 @@ class InternalMeetingService:
             meet.save()
             return Response({'meet_id': meet.meet_id,
                              'title': meet.title,
-                             'open_time': meet.open_time,
-                             'close_time': meet.close_time,
+                             'open_time': datetime.strptime(meet.open_time, "%H:%M").time().strftime('%Y-%m-%dT%H:%M:%S.%fZ') ,
+                             'close_time': datetime.strptime(meet.close_time, "%H:%M").time().strftime('%Y-%m-%dT%H:%M:%S.%fZ'),
+                             'meeting_date': datetime.strptime(meet.meeting_date, "%Y-%m-%d").date().strftime('%Y-%m-%dT%H:%M:%S.%fZ'),
                              'meeting_type': meet.meeting_type,
-                             'meeting_date': meet.meeting_date,
                              'notes': meet.agenda}, status=status.HTTP_201_CREATED)
 
     def validate_updated_input(self, data, meetings,meet_id):

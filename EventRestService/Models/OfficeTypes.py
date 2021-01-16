@@ -6,4 +6,4 @@ class Office_Types(models.Model):  # Basic information about office types
     office_types = models.CharField(max_length=100)
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    modified_at = models.DateTimeField(auto_now=True)
+    updated_at = models.DateTimeField(auto_now=True)

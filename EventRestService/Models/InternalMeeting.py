@@ -27,4 +27,4 @@ class Internal_Meeting(models.Model): # Internal Meeting activity details
     meeting_type = models.CharField(max_length=2, choices=MEETING_TYPE_CHOICES, default=MEETING)
     is_open = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    modified_at = models.DateTimeField(auto_now=True)
+    updated_at = models.DateTimeField(auto_now=True)

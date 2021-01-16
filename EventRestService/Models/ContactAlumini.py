@@ -7,7 +7,7 @@ from EventRestService.Models.OfficeTypes import Office_Types
 class Contact_alumini(models.Model):
     contact_id = models.AutoField(primary_key=True)
     user = models.ForeignKey(user_details, on_delete=models.CASCADE)
-    comp_id = models.ForeignKey(Company_Details, on_delete=models.CASCADE)
+    comp_id = models.ForeignKey(Company_Details, on_delete=models.CASCADE)  #int
     contact_name = models.CharField(max_length=50)
     referred_by = models.CharField(max_length=50)
     email = models.EmailField()
@@ -35,7 +35,7 @@ class Contact_alumini(models.Model):
     pin = models.IntegerField()
     recruitment = models.BooleanField()
     created_at = models.DateTimeField(auto_now_add=True)
-    modified_at = models.DateTimeField(auto_now=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.contact_name

@@ -9,5 +9,5 @@ class ExceptionHandlerMiddleware(MiddlewareMixin):
     def process_exception(self, request, exception):
         if isinstance(exception, CustomException):
             return ExceptionUtil.get_custom_exception_response(request, exception)
-        else:
-            return ExceptionUtil.get_exception_response(request, exception)
+        # else:
+        #     return ExceptionUtil.get_exception_response(request, exception)

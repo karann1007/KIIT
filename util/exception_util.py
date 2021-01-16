@@ -21,6 +21,6 @@ class ExceptionUtil:
 
     @classmethod
     def get_exception_response(cls, request, exception):
-        return HttpResponse(content=ExceptionUtil.get_error_object(message="Something went wrong! "),
+        return HttpResponse(content=ExceptionUtil.get_error_object(message="Something went wrong!LOL "),
                             status=status.HTTP_500_INTERNAL_SERVER_ERROR,
                             content_type='application/json')

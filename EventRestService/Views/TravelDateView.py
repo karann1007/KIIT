@@ -1,3 +1,4 @@
+from datetime import datetime
 
 from rest_framework import status
 from rest_framework.decorators import api_view, renderer_classes
@@ -16,7 +17,7 @@ def travel_date_view(request, format=None):
                              'title': e.title,
                              'travel_from': e.travel_from,
                              'travel_to': e.travel_to,
-                             'travel_date': e.travel_date,
-                             'return_date' : e.return_date ,
+                             'travel_date': datetime.strptime(e.travel_date,'%Y-%m-%d').date().strftime("%Y-%m-%dT%H:%M:%S.%fZ"),
+                             'return_date': datetime.strptime(e.return_date,'%Y-%m-%d').date().strftime("%Y-%m-%dT%H:%M:%S.%fZ"),
                              'notes': e.purpose
                              } for e in travels]}, status=status.HTTP_200_OK)

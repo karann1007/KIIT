@@ -5,3 +5,4 @@ static/
 templates/
 */__pycache__/
 *.pyc
+KSRMLauncher/Settings/development.py
