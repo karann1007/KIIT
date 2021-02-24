@@ -3,6 +3,7 @@ from django.urls import path
 from Hiring.Views.GetAssignCompany import get_assigncompany
 from Hiring.Views.GetInternship import get_internship_user
 from Hiring.Views.GetPlacement import get_placement_user
+from Hiring.Views.GetPlacementStatus import get_placement_status
 from Hiring.Views.GetSchools import get_schools
 from Hiring.Views.GetStreams import get_stream
 from Hiring.Views.GetVisiting import get_visiting
@@ -19,7 +20,8 @@ urlpatterns = [
     path('internships/',get_internship_user, name = 'internships'),                           #done
     path('placements/',get_placement_user, name = 'placements'),                              #done
     path('schools/',get_schools, name = 'schools'),                                           #done
-    path('streams/',get_stream, name = 'streams'),                                            #done
+    path('streams/',get_stream, name = 'streams'),
+    path('placement_status/',get_placement_status, name = 'placement_status'),                #done
     # path('visiting/',get_visiting, name = 'visiting'),
     path('internship_details/',internship_details, name = 'internship_details'),              #done
     path('placement_details/',placement_details, name = 'placement_details'),                  #done
