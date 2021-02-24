@@ -13,9 +13,9 @@ class Validator:
 
     @classmethod
     def validate_date(cls, date_string, message,message2):
-        date_string = datetime.datetime.strptime(date_string, "%Y-%m-%dT%H:%M:%S.%fZ").date().strftime('%Y-%m-%d')
+        date_string = datetime.datetime.strptime(date_string, "%Y-%m-%dT%H:%M:%S.%fZ").date()
         if date_string is not None:
-            if datetime.datetime.strptime(date_string, '%Y-%m-%d'):
+            if datetime.datetime.strptime(date_string, "%Y-%m-%dT%H:%M:%S.%fZ"):
                 return
             raise CustomException(message, status.HTTP_400_BAD_REQUEST)
         raise CustomException(message2, status.HTTP_400_BAD_REQUEST)
@@ -28,10 +28,8 @@ class Validator:
 
     @classmethod
     def validate_meet(cls,open_time, close_time, meetings,message):
-        open_time = datetime.datetime.strptime(open_time, "%Y-%m-%dT%H:%M:%S.%fZ").time().strftime('%H:%M')
-        close_time = datetime.datetime.strptime(close_time, "%Y-%m-%dT%H:%M:%S.%fZ").time().strftime('%H:%M')
-        otime = datetime.datetime.strptime(open_time,'%H:%M').time()
-        ctime = datetime.datetime.strptime(close_time,'%H:%M').time()
+        otime = datetime.datetime.strptime(open_time, "%Y-%m-%dT%H:%M:%S.%fZ").time()
+        ctime = datetime.datetime.strptime(close_time, "%Y-%m-%dT%H:%M:%S.%fZ").time()
         for e in meetings:
             if ((otime >= e.open_time) and (otime < e.close_time)) or ((ctime > e.open_time) and (ctime <= e.close_time)):
                 raise CustomException(message, status.HTTP_400_BAD_REQUEST)
@@ -57,18 +55,15 @@ class Validator:
 
     @classmethod
     def validate_date_today(cls, meeting_date, message):
-        date_str = datetime.datetime.strptime(meeting_date, "%Y-%m-%dT%H:%M:%S.%fZ").date().strftime('%Y-%m-%d')
-        date_object = datetime.datetime.strptime(date_str, '%Y-%m-%d').date()
-        if date_object >= datetime.datetime.today().date():
+        date = datetime.datetime.strptime(meeting_date, "%Y-%m-%dT%H:%M:%S.%fZ").date()
+        if date >= datetime.datetime.today().date():
             return
         raise CustomException(message, status.HTTP_400_BAD_REQUEST)
 
     @classmethod
     def validate_updated_meet(cls, meet_id,open_time, close_time, meetings, message):
-        open_time = datetime.datetime.strptime(open_time, "%Y-%m-%dT%H:%M:%S.%fZ").time().strftime('%H:%M')
-        close_time = datetime.datetime.strptime(close_time, "%Y-%m-%dT%H:%M:%S.%fZ").time().strftime('%H:%M')
-        otime = datetime.datetime.strptime(open_time, '%H:%M').time()
-        ctime = datetime.datetime.strptime(close_time, '%H:%M').time()
+        otime = datetime.datetime.strptime(open_time, "%Y-%m-%dT%H:%M:%S.%fZ").time()
+        ctime = datetime.datetime.strptime(close_time, "%Y-%m-%dT%H:%M:%S.%fZ").time()
         for e in meetings:
             if e.meet_id == meet_id :
                 continue
@@ -79,11 +74,9 @@ class Validator:
 
     @classmethod
     def validate_mom(cls,time, date,message):
-        date = datetime.datetime.strptime(date, "%Y-%m-%dT%H:%M:%S.%fZ").date().strftime('%Y-%m-%d')
+        date = datetime.datetime.strptime(date, "%Y-%m-%dT%H:%M:%S.%fZ").date()
         today = datetime.date.today()
-        now = datetime.datetime.now()
-        current_time = now.strftime("%H:%M")
-        ctime = datetime.datetime.strptime(current_time, '%H:%M').time()
+        ctime = datetime.datetime.now()
         if(((ctime < time)  and  (date==today)))  or  (date > today):
             raise CustomException(message, status.HTTP_400_BAD_REQUEST)
         return

@@ -20,7 +20,8 @@ INSTALLED_APPS = [
     'EventRestService',
     'corsheaders',
     'knox',
-    'Accounts'
+    'Accounts',
+    'Hiring'
 ]
 
 MIDDLEWARE = [
@@ -49,12 +50,11 @@ TEMPLATES = [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
+                'django.contrib.messages.context_processors.messages'
             ],
         },
     },
 ]
-
 WSGI_APPLICATION = 'KSRMLauncher.wsgi.application'
 
 
@@ -80,7 +80,7 @@ USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+USE_TZ = False
 
 
 CORS_ORIGIN_ALLOW_ALL = True

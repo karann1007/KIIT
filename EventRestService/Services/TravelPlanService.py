@@ -15,8 +15,8 @@ class TravelPlanService:
         self.__validate_input(data)
         plan = Travel_Plan()
         plan.title = data['title']
-        plan.travel_date = datetime.strptime(data['travel_date'], "%Y-%m-%dT%H:%M:%S.%fZ").date().strftime('%Y-%m-%d')
-        plan.return_date = datetime.strptime(data['return_date'], "%Y-%m-%dT%H:%M:%S.%fZ").date().strftime('%Y-%m-%d')
+        plan.travel_date = datetime.strptime(data['travel_date'], "%Y-%m-%dT%H:%M:%S.%fZ").date()
+        plan.return_date = datetime.strptime(data['return_date'], "%Y-%m-%dT%H:%M:%S.%fZ").date()
         plan.travel_from = data['travel_from']
         plan.travel_to = data['travel_to']
         plan.purpose = data.get('purpose')
@@ -31,8 +31,8 @@ class TravelPlanService:
             plan.save()
             return Response({'tr_id': plan.tr_id,
                              'title': plan.title,
-                             'travel_date': datetime.strptime(plan.travel_date,'%Y-%m-%d').date().strftime("%Y-%m-%dT%H:%M:%S.%fZ"),
-                             'return_date': datetime.strptime(plan.return_date,'%Y-%m-%d').date().strftime("%Y-%m-%dT%H:%M:%S.%fZ"),
+                             'travel_date': plan.travel_date,
+                             'return_date': plan.return_date,
                              'travel_from': plan.travel_from,
                              'travel_to': plan.travel_to,
                              'notes': plan.purpose,
@@ -58,8 +58,8 @@ class TravelPlanService:
             plan.save()
             return Response({'tr_id': plan.tr_id,
                              'title': plan.title,
-                             'travel_date': datetime.strptime(plan.travel_date,'%Y-%m-%d').date().strftime("%Y-%m-%dT%H:%M:%S.%fZ"),
-                             'return_date': datetime.strptime(plan.return_date,'%Y-%m-%d').date().strftime("%Y-%m-%dT%H:%M:%S.%fZ"),
+                             'travel_date': plan.travel_date,
+                             'return_date': plan.return_date,
                              'travel_from': plan.travel_from,
                              'travel_to': plan.travel_to,
                              'notes': plan.purpose,
@@ -69,8 +69,8 @@ class TravelPlanService:
 
     def __validate_input(self, data):
         Validator.validate_string(data.get('title'), "Title cannot be empty!")
-        Validator.validate_date(data.get('travel_date'), "Format of date is incorrect","Date cannot be empty")
-        Validator.validate_date(data.get('return_date'), "Format of date is incorrect","Date cannot be empty")
+        Validator.validate_date(data.get('travel_date'), "Format of date is incorrect","Travel Date cannot be empty")
+        Validator.validate_date(data.get('return_date'), "Format of date is incorrect","Return Date cannot be empty")
         Validator.validate_string(data.get('travel_from'), "Location field cannot be empty")
         Validator.validate_string(data.get('travel_to'), "Location field cannot be empty")
 

@@ -14,7 +14,7 @@ from EventRestService.Services.InternalMeetingService import InternalMeetingServ
 def create_internal_meeting(request, format=None):
     data = request.data
     user = request.user
-    date = datetime.strptime(data['meeting_date'], "%Y-%m-%dT%H:%M:%S.%fZ").date().strftime('%Y-%m-%d')
+    date = datetime.strptime(data['meeting_date'], "%Y-%m-%dT%H:%M:%S.%fZ").date()
     external_meetings = External_Meetings.objects.filter(meeting_date = date, user=user)
     internal_meetings = Internal_Meeting.objects.filter(meeting_date=date, user=user)
     meetings = list(chain(external_meetings, internal_meetings))

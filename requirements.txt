@@ -1,3 +1,8 @@
 django==2.1
 djangorestframework==3.11.0
 mysqlclient==1.4.6
+pymysql==0.10.0
+python-decouple
+django-cors-headers
+django-rest-knox
+django-debug-toolbar

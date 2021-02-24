@@ -15,22 +15,22 @@ class InternalMeetingService:
         meet = Internal_Meeting()
         meet.title = data['title']
         meet.meeting_type = data['meeting_type']
-        meet.meeting_date = datetime.strptime(data['meeting_date'], "%Y-%m-%dT%H:%M:%S.%fZ").date().strftime('%Y-%m-%d')
-        meet.open_time = datetime.strptime(data['open_time'], "%Y-%m-%dT%H:%M:%S.%fZ").time().strftime('%H:%M')
-        meet.close_time = datetime.strptime(data['close_time'], "%Y-%m-%dT%H:%M:%S.%fZ").time().strftime('%H:%M')
+        meet.meeting_date = datetime.strptime(data['meeting_date'], "%Y-%m-%dT%H:%M:%S.%fZ").date()
+        meet.open_time = datetime.strptime(data['open_time'], "%Y-%m-%dT%H:%M:%S.%fZ").time()
+        meet.close_time = datetime.strptime(data['close_time'], "%Y-%m-%dT%H:%M:%S.%fZ").time()
         meet.meeting_type = data['meeting_type']
         meet.agenda = data.get('agenda')
         meet.user_id = user.id
 
         with transaction.atomic():
             meet.save()
-            return Response({'meet_id': meet.meet_id,
-                             'title': meet.title,
-                             'open_time': datetime.strptime(meet.open_time, "%H:%M").time().strftime('%Y-%m-%dT%H:%M:%S.%fZ') ,
-                             'close_time': datetime.strptime(meet.close_time, "%H:%M").time().strftime('%Y-%m-%dT%H:%M:%S.%fZ'),
-                             'meeting_date': datetime.strptime(meet.meeting_date, "%Y-%m-%d").date().strftime('%Y-%m-%dT%H:%M:%S.%fZ'),
-                             'meeting_type': meet.meeting_type,
-                             'notes': meet.agenda},status=status.HTTP_201_CREATED)
+            return Response({'id': meet.meet_id,
+                             'Subject': meet.title,
+                             'StartTime': meet.open_time ,
+                             'EndTime': meet.close_time,
+                             'meeting_date': meet.meeting_date,
+                             'internal_meeting': meet.meeting_type,
+                             'internal_notes': meet.agenda},status=status.HTTP_201_CREATED)
 
     def validate_input(self, data,meetings):
         Validator.validate_string(data.get('title'), "Title cannot be empty!")
@@ -45,22 +45,22 @@ class InternalMeetingService:
         self.validate_updated_input(data, meetings,meet.meet_id)
         meet.title = data['title']
         meet.meeting_type = data['meeting_type']
-        meet.meeting_date = datetime.strptime(data['meeting_date'], "%Y-%m-%dT%H:%M:%S.%fZ").date().strftime('%Y-%m-%d')
-        meet.open_time = datetime.strptime(data['open_time'], "%Y-%m-%dT%H:%M:%S.%fZ").time().strftime('%H:%M')
-        meet.close_time = datetime.strptime(data['close_time'], "%Y-%m-%dT%H:%M:%S.%fZ").time().strftime('%H:%M')
+        meet.meeting_date = datetime.strptime(data['meeting_date'], "%Y-%m-%dT%H:%M:%S.%fZ").date()
+        meet.open_time = datetime.strptime(data['open_time'], "%Y-%m-%dT%H:%M:%S.%fZ").time()
+        meet.close_time = datetime.strptime(data['close_time'], "%Y-%m-%dT%H:%M:%S.%fZ").time()
         meet.meeting_type = data['meeting_type']
         meet.agenda = data.get('agenda')
         meet.user_id = user.id
 
         with transaction.atomic():
             meet.save()
-            return Response({'meet_id': meet.meet_id,
-                             'title': meet.title,
-                             'open_time': datetime.strptime(meet.open_time, "%H:%M").time().strftime('%Y-%m-%dT%H:%M:%S.%fZ') ,
-                             'close_time': datetime.strptime(meet.close_time, "%H:%M").time().strftime('%Y-%m-%dT%H:%M:%S.%fZ'),
-                             'meeting_date': datetime.strptime(meet.meeting_date, "%Y-%m-%d").date().strftime('%Y-%m-%dT%H:%M:%S.%fZ'),
-                             'meeting_type': meet.meeting_type,
-                             'notes': meet.agenda}, status=status.HTTP_201_CREATED)
+            return Response({'id': meet.meet_id,
+                             'Subject': meet.title,
+                             'StartTime': meet.open_time ,
+                             'EndTime': meet.close_time,
+                             'meeting_date': meet.meeting_date,
+                             'internal_meeting': meet.meeting_type,
+                             'internal_notes': meet.agenda}, status=status.HTTP_201_CREATED)
 
     def validate_updated_input(self, data, meetings,meet_id):
         Validator.validate_string(data.get('title'), "Title cannot be empty!")

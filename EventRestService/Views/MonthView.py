@@ -17,10 +17,9 @@ def month_view(request, format=None):
     external_meetings = External_Meetings.objects.filter(user = request.user, meeting_date__year= year, meeting_date__month= month)
     internal_meetings = Internal_Meeting.objects.filter(user=request.user, meeting_date__year=year, meeting_date__month=month)
     meetings = list(chain(external_meetings, internal_meetings))
-    return Response({'response' : [{ 'meet_id': e.meet_id,
-                             'title': e.title,
-                             'open_time': datetime.strptime(e.open_time, "%H:%M").time().strftime('%Y-%m-%dT%H:%M:%S.%fZ') ,
-                             'close_time': datetime.strptime(e.close_time, "%H:%M").time().strftime('%Y-%m-%dT%H:%M:%S.%fZ'),
-                             'meeting_date': datetime.strptime(e.meeting_date, "%Y-%m-%d").date().strftime('%Y-%m-%dT%H:%M:%S.%fZ'),
+    return Response({'response' : [{ 'Id': e.meet_id,
+                             'Subject': e.title,
+                             'StartTime': e.open_time ,
+                             'EndTime': e.close_time,
                              'meeting_type' : e.meeting_type ,
                              'notes': e.agenda, } for e in meetings]}, status=status.HTTP_200_OK)

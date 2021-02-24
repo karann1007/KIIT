@@ -46,9 +46,13 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'db' ,
         'USER': "root",
-        'PASSWORD': "pass@123" ,
+        'PASSWORD': "admin" ,
         'HOST': '127.0.0.1' ,
-        'PORT': "3306"
+        'PORT': "3306" ,
+'OPTIONS':{
+        "init_command":"SET foreign_key_checks = 0;",
+    }
+
     }
 }
 

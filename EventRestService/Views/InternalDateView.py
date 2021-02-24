@@ -14,9 +14,9 @@ def internal_date_view(request, format=None):
     meetings = Internal_Meeting.objects.filter(meet_id=meeting_id)
     return Response({'response' : [{'meet_id': e.meet_id,
                              'title': e.title,
-                             'open_time': datetime.strptime(e.open_time, "%H:%M").time().strftime('%Y-%m-%dT%H:%M:%S.%fZ') ,
-                             'close_time': datetime.strptime(e.close_time, "%H:%M").time().strftime('%Y-%m-%dT%H:%M:%S.%fZ'),
-                             'meeting_date': datetime.strptime(e.meeting_date, "%Y-%m-%d").date().strftime('%Y-%m-%dT%H:%M:%S.%fZ'),
+                             'open_time':e.open_time ,
+                             'close_time': e.close_time,
+                             'meeting_date': e.meeting_date,
                              'meeting_type' : e.meeting_type ,
                              'notes': e.agenda,
                              } for e in meetings]}, status=status.HTTP_200_OK)

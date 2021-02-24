@@ -16,7 +16,7 @@ def update_external_meeting(request, format=None):
     meet = External_Meetings.objects.filter(meet_id=meeting_id)
     data = request.data
     user = request.user
-    date = datetime.strptime(data['meeting_date'], "%Y-%m-%dT%H:%M:%S.%fZ").date().strftime('%Y-%m-%d')
+    date = data['meeting_date']
     meet = External_Meetings.objects.filter(meet_id=meeting_id)
     external_meetings = External_Meetings.objects.filter(meeting_date=date, user=user)
     internal_meetings = Internal_Meeting.objects.filter(meeting_date=date, user=user)
