@@ -19,16 +19,19 @@ class PlacementDetailService:
         placementdetail.comp_id = Company_Details.objects.filter(comp_id = data['comp_id'])[0]
         placementdetail.school_id = School.objects.filter(school_id = data['school_id'])[0]
         placementdetail.user = user_details.objects.filter(id=user.id)[0]
-        placementdetail.batch = data['batch']
-        placementdetail.visit_month = data['month']
-        placementdetail.placement_status_id = data['placement_status_id']
+        placementdetail.batch = data.get('batch')
+        placementdetail.visit_month = data.get('month')
+        placementdetail.placement_status_id = data.get('placement_status_id')
         profile_ctc_text = ""
-        for e in data['profile_ctc']:
-            profile_ctc_text += e+' # '
-        profile_ctc_text =profile_ctc_text[:-3]
-        placementdetail.profile_ctc = profile_ctc_text
-        placementdetail.remark = data['remark']
-        placementdetail.offers = data['offers']
+        if data.get('profile_ctc') is not None:
+            for e in data['profile_ctc']:
+                profile_ctc_text += e + ' # '
+            profile_ctc_text = profile_ctc_text[:-3]
+            placementdetail.profile_ctc = profile_ctc_text
+        else:
+            placementdetail.profile_ctc = data.get('profile_ctc')
+        placementdetail.remark = data.get('remark')
+        placementdetail.offers = data.get('offers')
         with transaction.atomic():
             placementdetail.save()
             for x in data['stream_id']:
@@ -40,7 +43,7 @@ class PlacementDetailService:
                              'comp_id': placementdetail.comp_id.comp_id ,
                              'school_id' : placementdetail.school_id.school_id ,
                              'stream_id': [e.stream_id for e in placementdetail.stream_id.all()],
-                             'profile_ctc': placementdetail.profile_ctc.split(' # '),
+                             'profile_ctc': placementdetail.profile_ctc.split(' # ') if placementdetail.profile_ctc is not None else placementdetail.profile_ctc,
                              'batch': placementdetail.batch,
                              'offers': placementdetail.offers,
                              'visit_month': placementdetail.visit_month,
@@ -60,23 +63,26 @@ class PlacementDetailService:
             stream = Stream.objects.filter(stream_id=x)[0]
             placement.stream_id.add(stream)
         placement.user = user_details.objects.filter(id=user.id)[0]
-        placement.batch = data['batch']
-        placement.visit_month = data['month']
-        placement.placement_status_id = data['placement_status_id']
+        placement.batch = data.get('batch')
+        placement.visit_month = data.get('month')
+        placement.placement_status_id = data.get('placement_status_id')
         profile_ctc_text = ""
-        for e in data['profile_ctc']:
-            profile_ctc_text += e + ' # '
-        profile_ctc_text = profile_ctc_text[:-3]
-        placement.profile_ctc = profile_ctc_text
-        placement.remark = data['remark']
-        placement.offers = data['offers']
+        if data.get('profile_ctc') is not None:
+            for e in data['profile_ctc']:
+                profile_ctc_text += e + ' # '
+            profile_ctc_text = profile_ctc_text[:-3]
+            placement.profile_ctc = profile_ctc_text
+        else:
+            placement.profile_ctc = data.get('profile_ctc')
+        placement.remark = data.get('remark')
+        placement.offers = data.get('offers')
         with transaction.atomic():
             placement.save()
             return Response({'placement_id': placement.placement_id,
                              'comp_id': placement.comp_id.comp_id ,
                              'school_id' : placement.school_id.school_id ,
                              'stream_id': [e.stream_id for e in placement.stream_id.all()],
-                             'profile_ctc': placement.profile_ctc.split(' # '),
+                             'profile_ctc': placement.profile_ctc.split(' # ') if placement.profile_ctc is not None else placement.profile_ctc,
                              'batch': placement.batch,
                              'offers': placement.offers,
                              'visit_month': placement.visit_month,

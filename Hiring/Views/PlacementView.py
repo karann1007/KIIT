@@ -16,7 +16,7 @@ def placement_view(request, format=None):
                              'comp_id': e.comp_id.comp_id ,
                              'school_id' : e.school_id.school_id ,
                              'stream_id': [x.stream_id for x in e.stream_id.all()],
-                             'profile_ctc': e.profile_ctc.split('# '),
+                             'profile_ctc': e.profile_ctc.split('# ') if e.profile_ctc is not None else e.profile_ctc,
                              'batch': e.batch,
                              'offers': e.offers,
                              'visit_month': e.visit_month,
