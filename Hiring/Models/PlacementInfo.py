@@ -13,7 +13,7 @@ class placement_info(models.Model):
     comp_id = models.ForeignKey(Company_Details, on_delete=models.CASCADE)
     school_id = models.ForeignKey(School, on_delete=models.CASCADE)
     stream_id = models.ManyToManyField(Stream)
-    placement_status_id = models.ForeignKey(Placement_Status,on_delete=models.CASCADE)
+    placement_status_id = models.IntegerField()
     profile_ctc = models.CharField(max_length=100)
     batch = models.IntegerField()
     offers = models.IntegerField()

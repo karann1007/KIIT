@@ -47,14 +47,14 @@ class InternshipDetailService:
                              'comp_id': internshipdetail.comp_id.comp_id,
                              'school_id': internshipdetail.school_id.school_id,
                              'stream_id': [e.stream_id for e in internshipdetail.stream_id.all()],
-                             'intern_profile_ctc': internshipdetail.intern_profile_ctc,
+                             'intern_profile_ctc': internshipdetail.intern_profile_ctc.split(' # '),
                              'intern_batch': internshipdetail.intern_batch,
                              'intern_offers': internshipdetail.intern_offers,
                              'start_date': internshipdetail.start_date,
                              'end_date' : internshipdetail.end_date ,
                              'remarks': internshipdetail.intern_remark,
                              'ppo_offered' :internshipdetail.ppo_offered,
-                             'ppo_profile_ctc' : internshipdetail.ppo_profile_ctc
+                             'ppo_profile_ctc' : internshipdetail.ppo_profile_ctc.split(' # ')
                              },status=status.HTTP_201_CREATED)
 
     def __validate_input(self, data):
@@ -91,12 +91,12 @@ class InternshipDetailService:
                              'comp_id': internship.comp_id.comp_id,
                              'school_id': internship.school_id.school_id,
                              'stream_id': [e.stream_id for e in internship.stream_id.all()],
-                             'intern_profile_ctc': internship.intern_profile_ctc,
+                             'intern_profile_ctc': internship.intern_profile_ctc.split(' # '),
                              'intern_batch': internship.intern_batch,
                              'intern_offers': internship.intern_offers,
                              'start_date': internship.start_date,
                              'end_date' : internship.end_date ,
                              'remarks': internship.intern_remark,
                              'ppo_offered' :internship.ppo_offered,
-                             'ppo_profile_ctc' : internship.ppo_profile_ctc
+                             'ppo_profile_ctc' : internship.ppo_profile_ctc.split(' # ')
                              }, status=status.HTTP_201_CREATED)

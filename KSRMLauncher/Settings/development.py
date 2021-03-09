@@ -5,7 +5,7 @@ from .base import *
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['127.0.0.1','0.0.0.0']
 
 INSTALLED_APPS +=[
     # 'debug_toolbar' ,
@@ -46,7 +46,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'db' ,
         'USER': "root",
-        'PASSWORD': "admin" ,
+        'PASSWORD': "pass@123" ,
         'HOST': '127.0.0.1' ,
         'PORT': "3306" ,
 'OPTIONS':{

@@ -21,7 +21,7 @@ class PlacementDetailService:
         placementdetail.user = user_details.objects.filter(id=user.id)[0]
         placementdetail.batch = data['batch']
         placementdetail.visit_month = data['month']
-        placementdetail.placement_status_id = Placement_Status.objects.filter(placement_status_id =data['placement_status_id'])[0]
+        placementdetail.placement_status_id = data['placement_status_id']
         profile_ctc_text = ""
         for e in data['profile_ctc']:
             profile_ctc_text += e+' # '
@@ -40,12 +40,12 @@ class PlacementDetailService:
                              'comp_id': placementdetail.comp_id.comp_id ,
                              'school_id' : placementdetail.school_id.school_id ,
                              'stream_id': [e.stream_id for e in placementdetail.stream_id.all()],
-                             'profile_ctc': placementdetail.profile_ctc,
+                             'profile_ctc': placementdetail.profile_ctc.split(' # '),
                              'batch': placementdetail.batch,
                              'offers': placementdetail.offers,
                              'visit_month': placementdetail.visit_month,
                              'remarks': placementdetail.remark,
-                             'placement_status_id': placementdetail.placement_status_id.placement_status
+                             'placement_status_id': placementdetail.placement_status_id
                              },status=status.HTTP_201_CREATED)
 
     def __validate_input(self, data):
@@ -62,7 +62,7 @@ class PlacementDetailService:
         placement.user = user_details.objects.filter(id=user.id)[0]
         placement.batch = data['batch']
         placement.visit_month = data['month']
-        placement.placement_status_id = Placement_Status.objects.filter(placement_status_id=data['placement_status_id'])[0]
+        placement.placement_status_id = data['placement_status_id']
         profile_ctc_text = ""
         for e in data['profile_ctc']:
             profile_ctc_text += e + ' # '
@@ -76,11 +76,11 @@ class PlacementDetailService:
                              'comp_id': placement.comp_id.comp_id ,
                              'school_id' : placement.school_id.school_id ,
                              'stream_id': [e.stream_id for e in placement.stream_id.all()],
-                             'profile_ctc': placement.profile_ctc,
+                             'profile_ctc': placement.profile_ctc.split(' # '),
                              'batch': placement.batch,
                              'offers': placement.offers,
                              'visit_month': placement.visit_month,
                              'remarks': placement.remark,
-                             'placement_status_id': placement.placement_status_id.placement_status
+                             'placement_status_id': placement.placement_status_id
                              }, status=status.HTTP_201_CREATED)
 

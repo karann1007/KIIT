@@ -16,10 +16,10 @@ def placement_view(request, format=None):
                              'comp_id': e.comp_id.comp_id ,
                              'school_id' : e.school_id.school_id ,
                              'stream_id': [x.stream_id for x in e.stream_id.all()],
-                             'profile_ctc': e.profile_ctc,
+                             'profile_ctc': e.profile_ctc.split('# '),
                              'batch': e.batch,
                              'offers': e.offers,
                              'visit_month': e.visit_month,
                              'remarks': e.remark,
-                             'placement_status_id': e.placement_status_id.placement_status
+                             'placement_status_id': e.placement_status_id
                              } for e in placement_companies]}, status=status.HTTP_200_OK)

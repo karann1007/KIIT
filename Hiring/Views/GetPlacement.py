@@ -14,4 +14,4 @@ def get_placement_user(request, format=None):
     user = request.user
     comp_id = request.GET.get('comp_id',None)
     placement_details = placement_info.objects.filter(user=user,comp_id=comp_id)
-    return Response({'response' : [{ 'placement_info_id' :e.placement_id, 'offers' : e.offers , 'month' : e.visit_month ,'placement_status' : e.placement_status_id.placement_status,'school_name':e.school_id.school_name, 'profile_ctc':e.profile_ctc } for e in placement_details]}, status=status.HTTP_200_OK)
+    return Response({'response' : [{ 'placement_info_id' :e.placement_id, 'offers' : e.offers , 'month' : e.visit_month ,'placement_status' : e.placement_status_id,'school_id':e.school_id.school_id,'school_name':e.school_id.school_name, 'profile_ctc':e.profile_ctc.split(' # ') } for e in placement_details]}, status=status.HTTP_200_OK)
