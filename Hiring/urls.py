@@ -1,11 +1,15 @@
 from django.urls import path
 
 from Hiring.Views.GetAssignCompany import get_assigncompany
+from Hiring.Views.GetCurrentHot import get_current_hot
 from Hiring.Views.GetInternship import get_internship_user
+from Hiring.Views.GetNextHot import get_next_hot
+from Hiring.Views.GetNotVisiting import get_not_visiting
 from Hiring.Views.GetPlacement import get_placement_user
 from Hiring.Views.GetPlacementStatus import get_placement_status
 from Hiring.Views.GetSchools import get_schools
 from Hiring.Views.GetStreams import get_stream
+from Hiring.Views.GetVisited import get_visited
 from Hiring.Views.GetVisiting import get_visiting
 from Hiring.Views.InternshipDetails import internship_details
 from Hiring.Views.InternshipView import internship_view
@@ -22,7 +26,11 @@ urlpatterns = [
     path('schools/',get_schools, name = 'schools'),                                           #done
     path('streams/',get_stream, name = 'streams'),
     path('placement_status/',get_placement_status, name = 'placement_status'),                #done
-    # path('visiting/',get_visiting, name = 'visiting'),
+    path('visiting/',get_visiting, name = 'visiting'),
+    path('current_hot_visiting/',get_current_hot, name = 'current_hot'),
+    path('next_hot_visiting/',get_next_hot, name = 'next_hot'),
+    path('visited/',get_visited, name = 'visited'),
+    path('not_visiting/',get_not_visiting, name = 'not_visiting'),
     path('internship_details/',internship_details, name = 'internship_details'),              #done
     path('placement_details/',placement_details, name = 'placement_details'),                  #done
     path('internship_view/',internship_view, name = 'internship_view'),                       #done
