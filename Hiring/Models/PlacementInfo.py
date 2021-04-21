@@ -1,7 +1,7 @@
 from django.db import models
 
 from Accounts.Models.UserDetails import user_details
-from EventRestService.Models.CompanyDetails import Company_Details
+from Scheduler.Models.CompanyDetails import Company_Details
 from Hiring.Models.PlacementStatus import Placement_Status
 from Hiring.Models.School import School
 from Hiring.Models.Stream import Stream

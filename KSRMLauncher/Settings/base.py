@@ -17,11 +17,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'rest_framework',
-    'EventRestService',
+    'Scheduler',
     'corsheaders',
     'knox',
     'Accounts',
-    'Hiring'
+    'Hiring',
+    'Contact'
 ]
 
 MIDDLEWARE = [
@@ -64,7 +65,7 @@ WSGI_APPLICATION = 'KSRMLauncher.wsgi.application'
 
 
 AUTHENTICATION_BACKENDS = (
-    'EventRestService.AuthBackend.CustomUserModelBackend.CustomUserModelBackend',
+    'Scheduler.AuthBackend.CustomUserModelBackend.CustomUserModelBackend',
     'django.contrib.auth.backends.ModelBackend' ,
 )
 

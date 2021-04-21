@@ -5,8 +5,8 @@ from rest_framework import status
 from rest_framework.response import Response
 
 from Accounts.Models.UserDetails import user_details
-from EventRestService.Models import CompanyDetails
-from EventRestService.Models.CompanyDetails import Company_Details
+from Scheduler.Models import CompanyDetails
+from Scheduler.Models.CompanyDetails import Company_Details
 from Hiring.Models.InternshipInfo import internship_info
 from Hiring.Models.School import School
 from Hiring.Models.Stream import Stream

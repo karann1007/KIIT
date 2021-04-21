@@ -3,7 +3,7 @@ from rest_framework.decorators import api_view, renderer_classes
 from rest_framework.renderers import JSONRenderer
 from rest_framework.response import Response
 
-from EventRestService.Models.CompanyDetails import Company_Details
+from Scheduler.Models.CompanyDetails import Company_Details
 from Hiring.Models.AssignCompany import Assign_company
 from Hiring.Models.PlacementInfo import placement_info
 

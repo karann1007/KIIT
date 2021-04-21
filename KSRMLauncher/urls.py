@@ -6,8 +6,9 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include('EventRestService.urls')),
+    path('api/', include('Scheduler.urls')),
     path('hiring/',include('Hiring.urls')),
+    path('contact/',include('Contact.urls')),
 ]
 
 if settings.DEBUG:

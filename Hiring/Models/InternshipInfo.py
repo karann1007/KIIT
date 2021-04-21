@@ -3,7 +3,7 @@ from django.db.models import DO_NOTHING
 
 import Hiring
 from Accounts.Models.UserDetails import user_details
-from EventRestService.Models.CompanyDetails import Company_Details
+from Scheduler.Models.CompanyDetails import Company_Details
 from Hiring.Models.School import School
 from Hiring.Models.Stream import Stream
 

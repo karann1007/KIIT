@@ -3,7 +3,7 @@ from rest_framework import status
 from rest_framework.response import Response
 
 from Accounts.Models.UserDetails import user_details
-from EventRestService.Models.CompanyDetails import Company_Details
+from Scheduler.Models.CompanyDetails import Company_Details
 from Hiring.Models.PlacementInfo import placement_info
 from Hiring.Models.PlacementStatus import Placement_Status
 from Hiring.Models.School import School

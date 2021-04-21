@@ -1,7 +1,7 @@
 from django.db import models
 
 from Accounts.Models.UserDetails import user_details
-from EventRestService.Models.CompanyDetails import Company_Details
+from Scheduler.Models.CompanyDetails import Company_Details
 
 
 class Assign_company(models.Model):
