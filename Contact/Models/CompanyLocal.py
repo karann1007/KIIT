@@ -13,7 +13,7 @@ class Company_Local(models.Model):  # Companies basic information
     address = models.CharField(max_length=100, null=True, blank=True)
     ho = models.CharField(max_length=100, null=True, blank=True)
     city = models.CharField(max_length=100, null=True, blank=True)
-    country = models.CharField(max_length=100,default="India")
+    country = models.CharField(max_length=100,default="India",null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

@@ -1,5 +1,5 @@
 from .base import *
-
+import django_heroku
 # override base.py here
 
 
@@ -60,3 +60,4 @@ DATABASES = {
 
 STRIPE_PUBLIC_KEY =''
 STRIPE_SECRET_KEY =''
+django_heroku.settings(locals())
