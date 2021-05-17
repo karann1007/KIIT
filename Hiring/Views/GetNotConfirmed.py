@@ -9,10 +9,10 @@ from Hiring.Models.PlacementInfo import placement_info
 
 @api_view(['GET'])
 @renderer_classes([JSONRenderer])
-def get_not_visiting(request, format=None):
+def get_not_confirmed(request, format=None):
     user = request.user
     batch = request.GET.get("batch",None)
     assigned = Assign_company.objects.filter(user=user)
     companies = [ e.comp_id for e in assigned ]
-    placement_companies = placement_info.objects.filter(batch=batch,comp_id__in=companies,placement_status_id=5)
+    placement_companies = placement_info.objects.filter(batch=batch,comp_id__in=companies,placement_status_id=None)
     return Response({'response' : [{ 'placement_info_id' :e.placement_id,'company_name':e.comp_id.company_name ,'company_id' : e.comp_id.comp_id , 'month' : e.visit_month ,'school_id':e.school_id.school_id,'school_name':e.school_id.school_name , 'profile_ctc':e.profile_ctc.split(' # ') if e.profile_ctc is not None else e.profile_ctc } for e in placement_companies]}, status=status.HTTP_200_OK)

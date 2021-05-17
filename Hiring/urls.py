@@ -4,6 +4,7 @@ from Hiring.Views.GetAssignCompany import get_assigncompany
 from Hiring.Views.GetCurrentHot import get_current_hot
 from Hiring.Views.GetInternship import get_internship_user
 from Hiring.Views.GetNextHot import get_next_hot
+from Hiring.Views.GetNotConfirmed import get_not_confirmed
 from Hiring.Views.GetNotVisiting import get_not_visiting
 from Hiring.Views.GetPlacement import get_placement_user
 from Hiring.Views.GetPlacementStatus import get_placement_status
@@ -31,8 +32,9 @@ urlpatterns = [
     path('next_hot_visiting/',get_next_hot, name = 'next_hot'),
     path('visited/',get_visited, name = 'visited'),
     path('not_visiting/',get_not_visiting, name = 'not_visiting'),
-    path('internship_details/',internship_details, name = 'internship_details'),              #done
-    path('placement_details/',placement_details, name = 'placement_details'),                  #done
+    path('not_confirmed/', get_not_confirmed, name='not_confirmed'),
+    path('internship_details/',internship_details, name = 'internship_details'),              #Creat Internship
+    path('placement_details/',placement_details, name = 'placement_details'),                 #Creat Placement
     path('internship_view/',internship_view, name = 'internship_view'),                       #done
     path('placement_view/',placement_view, name = 'placement_view'),                           #done
     path('update_internship/', update_internship, name='update_internship'),                   #done
