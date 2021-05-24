@@ -6,7 +6,7 @@ class user_details(User):
     address = models.TextField(null=True)
     usertype = models.CharField(max_length=10, null=True)
     name = models.CharField(max_length=100, default="")
-    zone = models.CharField(max_length=10, null=True)
+    zone = models.TextField(max_length=25, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
 

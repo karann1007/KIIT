@@ -9,6 +9,8 @@ urlpatterns = [
     path('api/', include('Scheduler.urls')),
     path('hiring/',include('Hiring.urls')),
     path('contact/',include('Contact.urls')),
+    path('accounts/', include('Accounts.urls')),
+
 ]
 
 if settings.DEBUG:

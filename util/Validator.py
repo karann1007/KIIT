@@ -1,7 +1,11 @@
 import datetime
 
+from Accounts.Models.UserDetails import user_details
 from Exceptions.exceptions import CustomException
 from rest_framework import status
+
+from Scheduler.Models.CompanyDetails import Company_Details
+
 
 class Validator:
 
@@ -80,4 +84,37 @@ class Validator:
         if(((ctime < time)  and  (date==today)))  or  (date > today):
             raise CustomException(message, status.HTTP_400_BAD_REQUEST)
         return
+
+    @classmethod
+    def validate_username(cls,self, username, msg ):
+        if user_details.objects.exclude(id=self.id).filter(username__iexact=username):
+            raise CustomException(msg, status.HTTP_400_BAD_REQUEST)
+
+
+    @classmethod
+    def validate_email(cls, self, email, msg):
+        if user_details.objects.exclude(id=self.id).filter(email__iexact=email):
+            raise CustomException(msg, status.HTTP_400_BAD_REQUEST)
+
+    @classmethod
+    def validate_zone(cls, zone, msg):
+        if zone is not None:
+            return
+        else:
+            raise CustomException(msg, status.HTTP_400_BAD_REQUEST)
+
+    @classmethod
+    def validate_company(cls, self, company_name, msg):
+        if Company_Details.objects.exclude(comp_id=self.comp_id).filter(company_name__iexact=company_name):
+            raise CustomException(msg, status.HTTP_400_BAD_REQUEST)
+
+    @classmethod
+    def validate_superuser(cls, user ,msg):
+        if user.is_superuser:
+            return
+        else:
+            raise CustomException(msg, status.HTTP_401_UNAUTHORIZED)
+
+
+
 

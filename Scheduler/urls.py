@@ -5,7 +5,7 @@ import KSRMLauncher
 from knox import views as knox_views
 
 from Accounts.Views.LoginAPI import LoginAPI
-from Accounts.Views.RegisterAPI import RegisterAPI
+from Accounts.Views.Register import register
 from Scheduler.Views.ContactPerson import contact_person
 from Scheduler.Views.CreateExternalMeeting import create_external_meeting
 from Scheduler.Views.CreateInternalMeeting import create_internal_meeting
@@ -31,7 +31,7 @@ app_name = 'Scheduler'
 
 
 urlpatterns = [
-    path('register/', RegisterAPI.as_view(), name='register'),                              # register a user                             done
+    path('register/', register, name="register")    ,                                       # register a user                             done
     path('login/', LoginAPI.as_view(), name='login'),                                       # login a user                                done
     path('logout/', knox_views.LogoutView.as_view(), name='logout'),                        # logout user                                 done
     path('external/',create_external_meeting, name = 'external_meeting'),                   # create external meeting                     done
