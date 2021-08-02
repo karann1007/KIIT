@@ -5,7 +5,7 @@ import django_heroku
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1','0.0.0.0']
+ALLOWED_HOSTS = ['127.0.0.1','0.0.0.0','https://krm-kiit.herokuapp.com']
 
 INSTALLED_APPS +=[
     # 'debug_toolbar' ,
