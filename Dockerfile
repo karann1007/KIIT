@@ -58,6 +58,7 @@ RUN sh build.sh
 ADD . .
 
 # Run the app
-RUN wget https://codejudge-starter-repo-artifacts.s3.ap-south-1.amazonaws.com/backend-project/python/django/run-2.sh
-RUN chmod 775 ./run-2.sh
-CMD sh run-2.sh
+#RUN wget https://codejudge-starter-repo-artifacts.s3.ap-south-1.amazonaws.com/backend-project/python/django/run-2.sh
+#RUN ./util/setup.sh
+RUN chmod 775 ./util/setup.sh
+CMD sh ./util/setup.sh
